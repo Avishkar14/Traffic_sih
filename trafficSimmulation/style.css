@@ -1,0 +1,96 @@
+/* General Setup */
+body {
+    background-color: #000;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden; /* Prevent scrollbars */
+}
+
+/* Grid container for the 4 Quadrants */
+#intersection {
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    /* The gap color creates the dividing lines */
+    background-color: #fff; 
+    gap: 2px; /* This sets the thickness of the lines */
+}
+
+/* Styling for each Quadrant */
+.quadrant {
+    background-color: #000;
+    position: relative; /* For positioning the lane label inside */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Styling for Lane Labels */
+.lane-label {
+    position: absolute;
+    top: 25px;
+    left: 40px;
+    color: #fff;
+    font-size: 2em;
+    font-weight: 300;
+    margin: 0;
+}
+
+/* Traffic Light Casing */
+.traffic-light-set {
+    background-color: #4a5568; /* Desaturated blue-gray from image */
+    border: 2px solid #2d3748; /* Darker border */
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Individual Lights */
+.light {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    /* Inset shadow for the 3D "off" look */
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.5);
+    /* Muted 'off' state to match the image */
+    opacity: 0.5;
+    filter: grayscale(80%);
+}
+
+/* When a light is active, remove the "off" state styles */
+.light.active {
+    opacity: 1;
+    filter: grayscale(0%);
+}
+
+/* Base colors for the lights */
+.light.red    { background-color: #ef4444; }
+.light.yellow { background-color: #f59e0b; }
+.light.green  { background-color: #22c55e; }
+.light.blue   { background-color: #3b82f6; }
+
+/* Glowing effect for active lights (overrides the inset shadow) */
+.light.red.active    { box-shadow: 0 0 25px 5px #ef4444; }
+.light.yellow.active { box-shadow: 0 0 25px 5px #f59e0b; }
+.light.green.active  { box-shadow: 0 0 25px 5px #22c55e; }
+.light.blue.active   { box-shadow: 0 0 25px 5px #3b82f6; }
+
+
+/* Add this to the end of your style.css */
+
+/* Style for when the intersection is locked during a transition */
+#intersection.locked {
+    cursor: not-allowed;
+}
+
+#intersection.locked .light {
+    pointer-events: none; /* Disables clicks on lights */
+}
